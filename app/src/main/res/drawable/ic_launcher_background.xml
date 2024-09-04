@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:padding="20dp" android:color="#F0F0F0"/>  <!-- 背景颜色为浅灰色 -->
+
+</shape>

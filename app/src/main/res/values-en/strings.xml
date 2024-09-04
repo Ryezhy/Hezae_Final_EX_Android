@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">莴苣</string>
+    <string name="navigation_drawer_open">打开导航栏抽屉</string>
+    <string name="navigation_drawer_close">关闭导航栏抽屉</string>
+    <string name="nav_header_title">Hezae_EX</string>
+    <string name="nav_header_subtitle">https://github.com/Ryezhy</string>
+    <string name="nav_header_desc">导航头部</string>
+    <string name="menu_home">主页</string>
+    <string name="menu_pictures">相册</string>
+    <string name="menu_slideshow">幻灯片</string>
+    <string name="action_about">设置</string>
+    <string name="operate_take_picture">拍照</string>
+    <string name="menu_settings">设置</string>
+</resources>
