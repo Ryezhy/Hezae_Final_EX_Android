@@ -13,17 +13,31 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.hezae.hezae_final_ex_android.databinding.ActivityMainBinding
 import android.Manifest
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
+import android.os.Environment
+import android.provider.DocumentsContract
+import android.provider.MediaStore
+import android.util.Log
+import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import java.io.File
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    private val REQUEST_STORAGE_PERMISSION = 1
+    private val REQUEST_SELECT_FILE = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this, "已授权", Toast.LENGTH_SHORT).show()
         }
-
+        openFilePicker()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -71,9 +85,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    // 使用 registerForActivityResult 注册权限请求
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+    // 使用 registerForActivityResult 注册权限请求相机
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission())
+    { isGranted: Boolean ->
             // 权限请求回调函数
             if (isGranted) {
                 // 权限授予，执行相机操作
@@ -81,5 +95,28 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "授权失败", Toast.LENGTH_SHORT).show()
             }
+    }
+
+
+
+    private fun openFilePicker() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*" // 允许选择所有文件类型
         }
+        filePickerLauncher.launch(intent)
+    }
+    // 创建一个 ActivityResultLauncher 用于处理文件选择器的结果
+    private val filePickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val uri = result.data?.data
+            if (uri != null) {
+            }
+        }
+    }
+
+    
+
+
+
 }

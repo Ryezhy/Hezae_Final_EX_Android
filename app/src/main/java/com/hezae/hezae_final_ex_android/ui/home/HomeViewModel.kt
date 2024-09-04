@@ -1,20 +1,23 @@
 package com.hezae.hezae_final_ex_android.ui.home
 
-import android.net.Uri
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.io.File
 
 class HomeViewModel : ViewModel() {
 
-    val AUTHORITY = "com.cs.camerademo.fileProvider" //FileProvider的签名(后面会介绍)
-    val REQUEST_CODE_CAPTURE_RAW = 6 //startActivityForResult时的请求码
-    var imageFile: File? = null     //拍照后保存的照片
-    var imgUri: Uri? = null         //拍照后保存的照片的uri
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    private val _openFileButtonText = MutableLiveData<String>().apply {
+        value = "打开文件"
     }
-    val text: LiveData<String> = _text
+    public val openFileButtonText: LiveData<String> = _openFileButtonText
+
+    // 打开文件按钮点击事件
+    fun onOpenFileButtonClicked() {
+        if(openFileButtonText.value == "文件已打开"){
+            _openFileButtonText.value = "文件已关闭"
+        }else{
+            _openFileButtonText.value = "文件已打开"
+        }
+    }
 }
