@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this, "已授权", Toast.LENGTH_SHORT).show()
         }
-        openFilePicker()
+    //    openFilePicker()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -98,22 +98,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    private fun openFilePicker() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*" // 允许选择所有文件类型
-        }
-        filePickerLauncher.launch(intent)
-    }
-    // 创建一个 ActivityResultLauncher 用于处理文件选择器的结果
-    private val filePickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val uri = result.data?.data
-            if (uri != null) {
-            }
-        }
-    }
 
     
 
